@@ -7,10 +7,10 @@ const connectDB = async () => {
   try {
     // Set mongoose options
     mongoose.set('strictQuery', false);
-    const mongoUri = process.env.MONGO_URI;
+    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/powersense';
 
-    if (!mongoUri) {
-      throw new Error('MONGO_URI is not set. Please add it to BACKEND/.env');
+    if (!process.env.MONGO_URI) {
+      console.warn('MONGO_URI is not set. Falling back to local MongoDB at mongodb://127.0.0.1:27017/powersense');
     }
     
     let conn;
